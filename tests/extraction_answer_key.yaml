@@ -1,0 +1,80 @@
+# Hand-labeled per-field answer key for the five sample packages.
+# Extraction accuracy is measured per FIELD, not per deal — a deal can
+# route correctly for the wrong reason.
+#
+# A list means any of the values is acceptable (genuine ambiguity in the
+# package). `null` means the correct extraction is "missing".
+
+DEAL-001:
+  loan.requested_amount: 32000000
+  loan.annual_debt_service: 2268000
+  valuation.appraised_value: 45000000
+  operations.noi: 3130000
+  operations.effective_gross_income: 5310000
+  property.unit_count: 248
+  property.asset_type: multifamily
+  occupancy.physical_units_total: 248
+  occupancy.units_occupied_total: 232
+  occupancy.units_occupied_paying: null      # rent roll gives no paying split
+  occupancy.units_occupied_nonpaying: null
+  occupancy.economic_occupancy: 0.94
+  sponsor.net_worth: 58000000
+  sponsor.liquidity: 4100000
+  claims.ltv: 0.71
+  claims.dscr: 1.38
+
+DEAL-002:
+  loan.requested_amount: 41000000
+  loan.annual_debt_service: null             # only "implied DSCR" stated
+  valuation.appraised_value: 62000000
+  operations.noi: 4200000
+  property.unit_count: [140, 152, 12, null]  # keys vs keys+resi vs resi vs "keys aren't units" — genuinely ambiguous
+  property.asset_type: hospitality
+  sponsor.net_worth: 74000000
+  sponsor.liquidity: 9500000
+  claims.ltv: 0.66
+  claims.dscr: 1.45
+
+DEAL-003:
+  loan.requested_amount: 28500000
+  loan.annual_debt_service: null
+  valuation.appraised_value: null            # ordered, not received
+  operations.noi: null                       # T-12 to follow; estimates only
+  property.unit_count: 180
+  property.asset_type: multifamily
+  occupancy.physical_units_total: 180
+  occupancy.units_occupied_paying: 141
+  occupancy.units_occupied_nonpaying: 20     # "down — renovation, no rent"
+  occupancy.units_vacant: 19
+  occupancy.stated_occupancy: 0.96
+  sponsor.net_worth: 36000000
+  sponsor.liquidity: 3200000
+  claims.ltv: [0.70, null]                   # "approximately 70%, pending appraisal"
+
+DEAL-004:
+  loan.requested_amount: 54000000
+  loan.annual_debt_service: 3323000
+  valuation.appraised_value: 66700000
+  operations.noi: 4220000
+  property.unit_count: 312
+  property.asset_type: multifamily
+  occupancy.physical_units_total: 312
+  occupancy.units_occupied_total: 289
+  occupancy.economic_occupancy: 0.92
+  sponsor.net_worth: 61000000
+  sponsor.liquidity: 1900000
+  claims.ltv: 0.81
+
+DEAL-005:
+  loan.requested_amount: 39360000
+  loan.annual_debt_service: 2500000
+  valuation.appraised_value: 48000000
+  operations.noi: 2950000
+  property.unit_count: 210
+  property.asset_type: multifamily
+  occupancy.physical_units_total: 210
+  occupancy.units_occupied_total: 191
+  sponsor.net_worth: 52000000
+  sponsor.liquidity: 3800000
+  claims.ltv: 0.75
+  claims.dscr: 1.30

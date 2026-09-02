@@ -1,0 +1,29 @@
+# Queue ordering config. Ordering is a business preference, not a credit
+# rule — Dana can reweight this (e.g. add loan_size) without a code change.
+#
+# Tiers are fixed (advance -> needs_review -> decline). Within a tier, deals
+# are scored 0..1 on each component below and sorted by the weighted sum.
+# Deliberately NOT a count of missing fields: a missing document and a
+# numbers-don't-add-up problem are different work for an analyst.
+
+weights:
+  distance_from_box: 0.40   # closer to passing on evaluable criteria ranks higher
+  resolvability: 0.30       # gaps closable by one document rank above structural gaps
+  discrepancy: 0.20         # story-doesn't-hold-together pushes DOWN (score inverts penalty)
+  time_in_queue: 0.10       # prevents starvation
+  loan_size: 0.00           # off by default; Dana may want to weight proceeds
+
+age_horizon_days: 14        # a deal this old gets the full time_in_queue score
+loan_size_norm: 75000000    # normalizer for the loan_size component
+
+# Which single document would resolve a not-evaluable criterion.
+# A gap with no entry here is treated as structural (scores low).
+resolving_documents:
+  ltv: appraisal
+  dscr: trailing-12 operating statement
+  occupancy: current rent roll
+  sponsor_net_worth: sponsor financial statement
+  sponsor_liquidity: sponsor financial statement / quoted debt service
+  loan_size: loan request summary
+  asset_type: offering memo
+  property_exclusions: offering memo

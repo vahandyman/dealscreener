@@ -1,0 +1,46 @@
+# Lending box — transcribed from Credit's box, not invented here.
+# The `enforcement` flag (hard | graduated) is a CONFIG decision: the source
+# document does not classify every criterion. Where the source was silent,
+# the criterion carries an enforcement_note so the output shows the gap.
+# Changing any threshold here must require no code change.
+
+version: "2026-08-24"
+criteria:
+  asset_type:
+    enforcement: hard
+    allowed: [multifamily]
+    min_units: 5
+    required_status: [stabilized]
+  property_exclusions:
+    enforcement: hard
+    excluded: [hospitality, hotel, senior_living, assisted_living,
+               raw_land, single_family]
+    student_housing_max_pct: 50
+  market:
+    enforcement: hard
+    requirement: top_75_msa
+  loan_size:
+    enforcement: graduated
+    enforcement_note: "source doc did not classify enforcement; graduated is a config decision"
+    min: 5000000
+    max: 75000000
+  ltv:
+    enforcement: graduated
+    max: 0.80
+    near_line_tolerance: 0.03
+  dscr:
+    enforcement: graduated
+    min: 1.25
+    near_line_tolerance: 0.05
+  occupancy:
+    enforcement: graduated
+    min: 0.90
+    sustained_days: 90
+    near_line_tolerance: 0.03
+  sponsor_net_worth:
+    enforcement: graduated
+    rule: gte_loan_amount
+  sponsor_liquidity:
+    enforcement: graduated
+    min_months_pi: 9
+    near_line_tolerance_months: 1

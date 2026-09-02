@@ -1,0 +1,5 @@
+# Extraction model config. Model choice is a measured decision, not a vibe:
+# swap the model here and re-run the per-field extraction eval to compare.
+model: claude-sonnet-5
+max_tokens: 16000
+max_retries_on_validation_error: 1
